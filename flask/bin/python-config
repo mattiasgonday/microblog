@@ -1,4 +1,4 @@
-#!/Users/m/Documents/flask/bin/python
+#!/Users/m/Documents/microblog/flask/bin/python
 
 import sys
 import getopt
