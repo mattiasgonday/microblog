@@ -24,6 +24,11 @@ var/
 .installed.cfg
 *.egg
 bin/
+tmp/
+
+# Database files
+*.db
+db_repository/*
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

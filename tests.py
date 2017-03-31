@@ -7,7 +7,7 @@ from app import app, db
 from app.models import User
 
 class TestCase(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
