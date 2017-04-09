@@ -7,6 +7,7 @@ from datetime import datetime
 from forms import LoginForm, EditForm, PostForm, SearchForm
 from models import User, Post
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
+from .emails import follower_notification
 
 # index view function suppressed for brevity
 @app.errorhandler(404)
@@ -125,12 +126,14 @@ def load_user(id):
 @login_required
 def follow(nickname):
     user = User.query.filter_by(nickname=nickname).first()
+    follower_notification(user, g.user)
     if user is None:
         flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
     if user == g.user:
         flash('You can\'t follow yourself!')
         return redirect(url_for('user', nickname=nickname))
+    u = g.user.follow(user)
     if u is None:
         flash('Cannot follow ' + nickname + '.')
         return redirect(url_for('user', nickname=nickname))
